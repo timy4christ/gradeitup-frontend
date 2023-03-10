@@ -17,6 +17,8 @@ import CategoriesPage from "./components/admin/CategoriesPage";
 import AddCategoryPage from "./components/admin/AddCategoryPage";
 import CodeReviewerUpdateProfile from "./components/codereviewer/CodeReviewerUpdateProfile";
 import Contact from "./components/Contact";
+import AdminUpdateProfile from "./components/admin/AdminUpdateProfile";
+import StudentUpdateProfile from "./components/student/StudentUpdateProfile";
 
 
 function App() {
@@ -38,9 +40,16 @@ function App() {
         <Route path="/admin/add-student" element={<StudentSignUp></StudentSignUp>}></Route>
         <Route path="/admin/categories" element={<CategoriesPage></CategoriesPage>}></Route>
         <Route path="/admin/add-category" element={<AddCategoryPage></AddCategoryPage>}></Route>
-
+        <Route
+          path="/admin/update-profile"
+          element={<AdminUpdateProfile></AdminUpdateProfile>}
+        ></Route>
         {/* student */}
         <Route path="/student-dashboard" element={<StudentDashboard></StudentDashboard>}></Route>
+        <Route
+          path="/student/update-profile"
+          element={<StudentUpdateProfile/>}
+        ></Route>
         <Route
           path="/student/add-assignment"
           element={<AssignmentForm></AssignmentForm>}
@@ -60,6 +69,7 @@ function App() {
           path="/codereviewer/update-profile"
           element={<CodeReviewerUpdateProfile></CodeReviewerUpdateProfile>}
         ></Route>
+        
 
 
 

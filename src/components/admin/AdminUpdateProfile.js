@@ -1,41 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { getAdminDetailFromServer } from '../../service/AdminServiceApi';
 import { SideNav } from './SideNav'
+import "../../cssfiles/profile.css"
+import { getAdminDetailFromServer, updateAdminDetails } from '../../service/AdminServiceApi';
 import { useNavigate } from 'react-router-dom';
 
+function AdminUpdateProfile() {
 
-
-import "../../cssfiles/profile.css"
-
-
-function AdminDashboard() {
-    
     const navigate = useNavigate();
-    
-    const handleClick = (e) => {
-        navigate("/admin/update-profile")
-    }
+    const [admin, setAdmin] = useState({
+        id: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        mobileNo: ""
+    });
 
-    const [admin, setAdmin] = useState({})
 
-    const getAdminDetails = async () => {
-        const response = await getAdminDetailFromServer(1);
+    const getAdminDetail = async () => {
+        const response = await getAdminDetailFromServer(1); //need to add session id
         console.log(response.data);
         setAdmin(response.data);
     }
 
+    const handleChange = (e) => {
+        console.log();
+        setAdmin({ ...admin, [e.target.name]: e.target.value });
+    }
+
+    const handleClick = async () => {
+        const response = await updateAdminDetails(admin);
+        console.log(response.data);
+        navigate("/admin-dashboard");
+    }
+
     useEffect(() => {
-        getAdminDetails();
+        getAdminDetail();
     }, [])
 
-    return (
-        <>
-            {/* <div className="row ">
-                <div className="col-lg-2 sidebar"><SideNav></SideNav></div>
-                <div className="col-lg-10">Testing</div>
-            </div> */}
 
-<div className="row ">
+
+    return (
+        // <div className="row ">
+        //     <div className="col-lg-2 sidebar"><SideNav></SideNav></div>
+        //     <div className="col-lg-10">Testing</div>
+        // </div>
+
+        <div className="row ">
             <div className="col-lg-2 sidebar"><SideNav></SideNav></div>
             <div className="col-lg-10"><div>
 
@@ -50,17 +60,16 @@ function AdminDashboard() {
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <h4 className="text-right">Admin Profile</h4>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} className="">
                                     <label className="labels">Admin ID</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        disabled
                                         placeholder="id"
                                         name="id"
-                                        //onChange={(e) => onInputChange(e)}
+                                        //onChange={handleChange}
                                         value={admin.id}
-                                        required
+                                        disabled
 
                                     />
                                 </div>
@@ -72,9 +81,8 @@ function AdminDashboard() {
                                             className="form-control"
                                             placeholder="First  Name"
                                             name="firstName"
-                                            disabled
                                             value={admin.firstName}
-                                            // onChange={(e) => onInputChange(e)}
+                                            onChange={handleChange}
                                             required
 
                                         />
@@ -86,15 +94,14 @@ function AdminDashboard() {
                                             className="form-control"
                                             placeholder="Last Name"
                                             name="lastName"
-                                            disabled
-                                            // onChange={(e) => onInputChange(e)}
+                                            onChange={handleChange}
                                             value={admin.lastName}
                                             required
 
                                         />
                                     </div>
                                 </div>
-                                <div className="row">
+                                <div className="row mt-3">
                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} className="">
                                         <label className="labels">Email</label>
                                         <input
@@ -102,9 +109,9 @@ function AdminDashboard() {
                                             className="form-control"
                                             placeholder="EmailId"
                                             name="email"
-                                            disabled
-                                            // onChange={(e) => onInputChange(e)}
+                                            // onChange={handleChange}
                                             value={admin.email}
+                                            disabled
                                             required
 
                                         />
@@ -118,8 +125,7 @@ function AdminDashboard() {
                                         className="form-control"
                                         placeholder="Phone"
                                         name="mobileNo"
-                                        disabled
-                                        // onChange={(e) => onInputChange(e)}
+                                        onChange={handleChange}
                                         value={admin.mobileNo}
                                         required
 
@@ -128,13 +134,13 @@ function AdminDashboard() {
 
                             </div>
 
-                            <div className="text-center">
+                            <div className=" text-center">
                                 <button
                                     className="btn btn-primary profile-button"
                                     type="button"
                                     onClick={handleClick}
                                 >
-                                    Edit Profile
+                                    Update Profile
                                 </button>
                             </div>
                         </div>
@@ -144,8 +150,7 @@ function AdminDashboard() {
         </div>
 
 
-        </>
     )
 }
 
-export default AdminDashboard;
+export default AdminUpdateProfile;

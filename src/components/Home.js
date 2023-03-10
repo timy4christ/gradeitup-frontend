@@ -4,7 +4,7 @@ import "../cssfiles/Home.css"
 function Home() {
   return (
     <div>
-      {/* hero section */}
+      {/* hero section -- hello */}
       <div id="hero-section" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-indicators">
