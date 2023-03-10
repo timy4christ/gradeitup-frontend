@@ -75,18 +75,19 @@ function Home() {
           <img src="images/story/story2.jpg" alt="" />
         </div>
         <div className="story-cntx">
-          <h1>Our Story</h1>
+          <h1>Story Behind Sucess..</h1>
           <p>
             <small>
-              ABC is a pure home based restaurant serving delicious food
-              cooked with freshest ingredients. Over the years the brand is
-              recognized for its uncompromising levels in food & service.
+               Study hard will give Students the needed push.
+              Listen to yourself when the world turns its back on you.
+              Believe you can and you will! Never stop dreaming just because it's hard to Achieve...
+              
             </small>
           </p>
           <h4>
             <i>
-              Whisper to us about your feelings, and we will prepare what you
-              need now.
+            GradeItUp...... Don't expect the results without the work.
+              “The only place where success comes before work is in the dictionary....”
             </i>
           </h4>
           <button className="button">DISCOVER MORE</button>
