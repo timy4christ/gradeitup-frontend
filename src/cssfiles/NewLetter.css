@@ -1,0 +1,55 @@
+/* NEWLETTER SECTION */
+
+/* newletter start */
+#newletter{
+    /* background:url(images/newsletter.png); */
+    background-color: rgb(19, 25, 42);
+    height:120px;
+    /* color:aqua; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#text_part h3{
+    color:whitesmoke;
+    padding:10px 5px;
+}
+
+#text_part h6{
+    color:rgb(173, 168, 168);
+}
+
+#text_part h6 span{
+    color:goldenrod;
+}
+
+#input-container{
+    width:40%;
+    /* border:2px solid white; */
+    display:flex;
+    align-items:center;
+
+}
+
+#email_input{
+    width:100%;
+    padding:10px 15px;
+    outline:none;
+    border:none;
+    border-radius: 2px;
+    font-size:smaller;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color:rgb(255, 255, 255);
+}
+
+#input-container button{
+    border:1px solid rgb(85, 54, 54);
+    background-color: rgb(43, 152, 90) ;
+    color:rgb(255, 255, 255);
+    width:150px;
+    height: 43px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
