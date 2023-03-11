@@ -1,38 +1,51 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../cssfiles/Header.css'
 
-function Header() {
+function Header({ isLogged, setLogged }) {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        sessionStorage.clear();
+        setLogged(false);
+        navigate("/login");
+    }
+
     return (
         <div>
             <div className="header">
                 <div className="logo">GradeItUp</div>
                 <div className="nav-items">
                     <div className="left">
-                        <div>
-                            <Link className="anchor" to={"/"}>Home</Link>
-                        </div>
-                        <div>
-                            <Link className="anchor" to={"/about"}>About Us</Link>
-                        </div>
-                        <div>
-                            <Link className="anchor" to={"/contactus"}>Contact Us</Link>
-                        </div>
+                        {
+                            !isLogged ? (
+                                <>
+                                    <div>
+                                        <Link className="anchor" to={"/"}>Home</Link>
+                                    </div>
+                                    <div>
+                                        <Link className="anchor" to={"/about"}>About Us</Link>
+                                    </div>
+                                    <div>
+                                        <Link className="anchor" to={"/contactus"}>Contact Us</Link>
+                                    </div>
+                                </>) : <></>
+                        }
                     </div>
                     <div className="right">
-                        {/* <div>
-                            <span className="anchor" onClick={""}>Admin</span>
-                        </div> */}
-                        {/* <div>
-                            <Link className="anchor" to={'/signup'}>SignUp</Link>
-                        </div> */}
-                        <div>
-                            <Link className="anchor" to={'/login'}>Login</Link>
-                        </div>
+                        {
+                            isLogged ? (
+                                <div>
+                                    <div className="anchor" onClick={handleLogout}>Logout</div>
+                                </div>) : <><div>
+                                    <Link className="anchor" to={'/login'}>Login</Link>
+                                </div></>
+                        }
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

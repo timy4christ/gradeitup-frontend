@@ -2,7 +2,7 @@
 
 .header {
     /* background-color: #F1E2BF; */
-    background-color:#0a0a0a;
+    background-color: #0a0a0a;
     /* border:1px solid black; */
     height: 10vh;
     display: flex;
@@ -19,7 +19,7 @@
     /* border:1px solid rgb(253, 17, 17); */
     padding: 15px;
     margin: 20px;
-    color:antiquewhite;
+    color: antiquewhite;
 }
 
 .header .nav-items {
@@ -50,8 +50,10 @@
     color: #f8f8f8;
     font-weight: 500;
     color: #f8f8f8;
+    cursor: pointer;
 }
 
 .header .nav-items div .anchor:hover {
     background-color: #e1a347;
+    cursor: pointer;
 }
