@@ -116,10 +116,13 @@ function Login() {
                   onChange={handleChange}
                   
                 />
+                <br></br>
                 <i className="icon fas fa-envelope" />
                 <i className="error error-icon fas fa-exclamation-circle" />
                 <p className="text-danger">{errors.email}</p>
               </div>
+              <br></br>
+              
               <div className="error error-txt">Email can't be blank</div>
             </div>
             <div className="field password">
@@ -137,6 +140,7 @@ function Login() {
                 <i className="error error-icon fas fa-exclamation-circle" />
                 <p className="text-danger">{errors.password}</p>
               </div>
+              <br></br>
               <div className="error error-txt">Password can't be blank</div>
             </div>
             <div className="selectRoleLogin">
@@ -171,6 +175,7 @@ function Login() {
             <div className="pass-txt">
               {/* <Link to="#">Forgot password?</Link> */}
             </div>
+            <br></br>
             <p className="text-danger">{errors.role}</p>
             <input
               type="submit"
