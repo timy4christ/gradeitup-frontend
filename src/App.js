@@ -51,8 +51,10 @@ function App() {
           path="/admin/add-codereviewer"
           element={<CodeReviewerSignUp></CodeReviewerSignUp>}
         ></Route>
-        <Route path="/admin/categories" element={<CategoriesPage></CategoriesPage>}></Route>
-        <Route path="/admin/add-category" element={<AddCategoryPage></AddCategoryPage>}></Route>
+        {/* <Route path="/admin/categories" element={<CategoriesPage></CategoriesPage>}></Route> */}
+        {/* <Route path="/admin/add-category" element={<AddCategoryPage></AddCategoryPage>}></Route> */}
+        
+        
         {/* student */}
         <Route path="/student-dashboard" element={<StudentDashboard></StudentDashboard>}></Route>
         <Route

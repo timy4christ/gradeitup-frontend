@@ -98,6 +98,16 @@ function CodeReviewerSignUp() {
     handleSubmit();
   };
 
+  useEffect(() => {
+    var urole = sessionStorage.getItem("role");
+    console.log(urole);
+
+    if (!urole && urole != "admin") {
+      sessionStorage.clear();
+      navigate("/");
+    }
+  }, [])
+
 
   return (
     <>

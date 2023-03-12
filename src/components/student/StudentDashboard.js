@@ -25,7 +25,15 @@ function StudentDashboard() {
     }
 
     useEffect(() => {
-        getStudentDetails();
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (!urole && urole != "student") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getStudentDetails();
+        }
     }, [])
 
     return (

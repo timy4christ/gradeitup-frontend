@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getAssignmentByIdFromServer, reviewAssignment } from '../../service/CodeReviewerServiceApi';
 import { SideNav } from './SideNav';
 
 function AssignmentReviewForm() {
 
+    const navigate = useNavigate();
     const location = useLocation();
 
     const [assignment, setAssignment] = useState({});
@@ -49,7 +50,17 @@ function AssignmentReviewForm() {
     // },[assignment])
 
     useEffect(() => {
-        getAssignmentById();
+
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (!urole && urole != "codereviewer") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getAssignmentById();
+        }
+
     }, [])
     return (
         <>

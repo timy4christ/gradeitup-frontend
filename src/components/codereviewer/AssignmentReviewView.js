@@ -22,7 +22,15 @@ function AssignmentReviewView() {
     }
 
     useEffect(() => {
-        getAllAssignments();
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (!urole && urole != "codereviewer") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getAllAssignments();
+        }
     }, [])
 
 
@@ -44,7 +52,7 @@ function AssignmentReviewView() {
                                             <Card.Body>
                                                 <Card.Title>{item.name}</Card.Title>
                                                 <Card.Text className='text-start'>
-                                                    <strong>GitHubUrl: </strong>{item.githubUrl}<br/>
+                                                    <strong>GitHubUrl: </strong>{item.githubUrl}<br />
                                                     <strong>Branch: </strong>{item.branch}
                                                 </Card.Text>
                                                 <Link to="/Assignment"> <Button variant="primary">Review</Button></Link>

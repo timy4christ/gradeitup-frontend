@@ -53,10 +53,17 @@ function AssignmentForm() {
         setCodeReviewerList(response.data);
     }
 
-
-
     useEffect(() => {
-        getCodeReviewerList();
+
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (!urole && urole != "student") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getCodeReviewerList();
+        }
     }, []);
 
     return (

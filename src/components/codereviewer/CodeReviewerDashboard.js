@@ -20,7 +20,16 @@ function CodeReviewerDashboard() {
     }
 
     useEffect(() => {
-        getCodeReviewerDetail();
+
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (!urole && urole != "codereviewer") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getCodeReviewerDetail();
+        }
     }, [])
 
 
