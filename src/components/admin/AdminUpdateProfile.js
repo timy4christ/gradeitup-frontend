@@ -34,7 +34,16 @@ function AdminUpdateProfile() {
     }
 
     useEffect(() => {
-        getAdminDetail();
+
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (urole != "admin") {
+            sessionStorage.clear();
+            navigate("/");
+        } else {
+            getAdminDetail();
+        }
     }, [])
 
 

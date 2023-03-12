@@ -1,114 +1,110 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import swal from "sweetalert";
 import "../../cssfiles/SignUp.css";
 import { addStudent } from "../../service/AdminServiceApi";
 import { SideNav } from "./SideNav";
 
 function StudentSignUp() {
 
-  const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  mobileNo: ""};
+  // const initialValues = {
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   password: "",
+  //   mobileNo: ""
+  // };
 
-  const [data, setData] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    mobileNo: ""
+  });
 
   const navigate = useNavigate();
 
   const [subject, setSubject] = useState({});
 
- 
-
   const handleChange = (e) => {
-    console.log("hello");
+    //console.log("hello");
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    console.log("hello vinod");
-    
-    setErrors(validate({ ...data, [e.target.name]: e.target.value }));
-    e.preventDefault();
-    console.log(data);
+  const handleSubmit = async () => {
     const response = await addStudent(data);
     console.log(response.data);
-
-    
-    setErrors(validate(data)); // adding function or calling fn -vinod
-    setIsSubmit(true);
-    // if (response.status == 200) {
-    //   //toast.success("Registered Successfully");
-    //   navigate("/login_form");
-    // } else {
-    //   //toast.error("Something went wrong!");
-    //   setData({
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    //     mobileNo: "",
-    //     password: "",
-    //     role:""
-    //   });
-    //   navigate("/signup_form")
-    // }
+    if (response.status == 200) {
+      swal("Registeration Successfully", "Student is Registered Successfully!", "success");
+      navigate("/admin-dashboard");
+    } else {
+      toast.error("Something went wrong!");
+      setData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        mobileNo: "",
+        password: "",
+        role: ""
+      });
+      navigate("/admin/add-student")
+    }
   };
 
-  
+
   useEffect(() => {
+    var urole = sessionStorage.getItem("role");
+    console.log(urole);
 
-    console.log(errors);
-    if(Object.keys(errors).length === 0 && isSubmit)
-    {
-      console.log(data);
-     
+    if (urole != "admin") {
+      sessionStorage.clear();
+      navigate("/");
     }
+  }, [])
 
-  },[errors]);
-
-
-  
-  const validate = (data) => {
-    const errors = {};
-    const firstNameRegex = /^[a-zA-Z]+$/;
+  const validate = (e) => {
+    const firstNameRegex = /^[a-zA-Z]{3,}$/;
     const regax = /^[^0-9]{2,}[a-z0-9._%+-]+@gmail\.com$/i;
-    const validpass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/g;
+    const validpass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/g;
     const phoneNumberRegex = /^[6-9]\d{9}$/
 
-  
+
     if (!data.email) {
-      errors.email = "Email is required!";
-    }else if(!regax.test(data.email)){
-      errors.email = "this is not a valid email format!";
+      toast.error("Email is required!");
+      return false;
+    } else if (!regax.test(data.email)) {
+      swal("Email", "This is not a valid email format!", "error")
+      return false;
     }
-    if(!data.firstName){
-      errors.firstName = "First Name is required!";
-    }else if(!firstNameRegex.test(data.firstName)){
-      errors.firstName = "Enter valid name- only char";
+    if (!data.firstName) {
+      toast.error("First Name is required!");
+      return false;
+    } else if (!firstNameRegex.test(data.firstName)) {
+      swal("FirstName", "Enter valid name. 1. Only Characters 2.Minimum three Characters", "error")
+      return false;
     }
-    if(!data.lastName){
-      errors.lastName = "Last Name is required!";
+    if (!data.lastName) {
+      toast.error("Last Name is required!");
+      return false;
     }
     if (!data.password) {
-      errors.password = "Password is required!";
-    } else if (!validpass.test(data.password)){
-      errors.password = "Required min 5 charactors and Numbers!";
+      toast.error("Password is required!");
+      return false;
+    } else if (!validpass.test(data.password)) {
+      swal("Password", "Alphanumeric string required", "error")
+      return false;
     }
     if (!data.mobileNo) {
-      errors.mobileNo = "Phone Number required!";
-    }else if(!phoneNumberRegex.test(data.mobileNo)){
-      errors.mobileNo = "Enter valid number";
+      toast.error("Phone Number required!");
+      return false;
+    } else if (!phoneNumberRegex.test(data.mobileNo)) {
+      swal("Phone Number", "Valid Phone number starting with 6 to 9", "error")
+      return false;
     }
-  
-    return errors;
+    handleSubmit();
   };
-  
-
-
 
   return (
     <>
@@ -128,7 +124,7 @@ function StudentSignUp() {
                   Student Registration
                 </h1>
                 <div className=" p-4">
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <div className="form-group">
                       <label htmlFor="name" className="font-weight-regular">
                         First Name
@@ -140,13 +136,12 @@ function StudentSignUp() {
                         id="fname"
                         value={data.firstName}
                         onChange={handleChange}
-                        
+
                       />
                       <span
                         id="fName"
                         className="text-danger font-weight-regular"
                       ></span>
-                      <p className="text-danger">{errors.firstName}</p>
                     </div>
                     <div className="form-group">
                       <label htmlFor="name" className="font-weight-regular">
@@ -159,13 +154,12 @@ function StudentSignUp() {
                         id="lname"
                         value={data.lastName}
                         onChange={handleChange}
-                        
+
                       />
                       <span
                         id="lName"
                         className="text-danger font-weight-regular"
                       ></span>
-                      <p className="text-danger">{errors.lastName}</p>
                     </div>
                     <div className="form-group">
                       <label className="font-weight-regular"> Email </label>
@@ -176,13 +170,12 @@ function StudentSignUp() {
                         id="emails"
                         value={data.email}
                         onChange={handleChange}
-                        
+
                       />
                       <span
                         id="emailids"
                         className="text-danger font-weight-regular"
                       ></span>
-                      <p className="text-danger">{errors.email}</p>
                     </div>
                     <div className="form-group">
                       <label className="font-weight-regular"> Password </label>
@@ -193,13 +186,12 @@ function StudentSignUp() {
                         className="form-control"
                         id="pass"
                         onChange={handleChange}
-                        
+
                       />
                       <span
                         id="passwords"
                         className="text-danger font-weight-regular"
                       ></span>
-                      <p className="text-danger">{errors.password}</p>
                     </div>
                     <div className="form-group">
                       <label className="font-weight-regular"> Mobile Number </label>
@@ -210,19 +202,18 @@ function StudentSignUp() {
                         id="mobileNo"
                         value={data.mobileNo}
                         onChange={handleChange}
-                        
-                        
                       />
                       <span
                         id="mobileNo"
                         className="text-danger font-weight-regular"
                       ></span>
-                      <p className="text-danger">{errors.mobileNo}</p>
                     </div>
                     <input
-                      type="submit"
+                      type="button"
                       name="submit"
                       className="btn btn-primary"
+                      value={"Register"}
+                      onClick={validate}
                     />
                     &emsp;
                   </form>

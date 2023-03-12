@@ -5,98 +5,73 @@ import "../cssfiles/Login.css";
 import { login } from "../service/AdminServiceApi";
 
 
-function Login() {
+function Login({ setisLogged }) {
   const navigate = useNavigate();
-  const initialValues = {email:"",password:"",role:""};
-  const [data, setData] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    role: ""
+  });
 
-  
+
 
   const handleChange = (e) => {
     // console.log(e.target.value);
     setData({ ...data, [e.target.name]: e.target.value });
-    
+
   };
 
   const handleSubmit = async (e) => {
-    setErrors(validate({ ...data, [e.target.name]: e.target.value }));
     e.preventDefault();
     console.log(data);
     const response = await login(data);
     console.log(response.data);
-    
-    
-    setErrors(validate(data)); // adding function or calling fn -vinod
-    setIsSubmit(true);
+    var user = response.data;
 
+    if (user && data.role === "student") {
 
-    if (response.data != null && data.role === "student") {
+      sessionStorage.setItem("id", user.id);
+      sessionStorage.setItem("firstName", user.firstName,);
+      sessionStorage.setItem("lastName", user.lastName,);
+      sessionStorage.setItem("email", user.email);
+      sessionStorage.setItem("role", "student");
+
+      toast.success("Login Succesfull");
+      setisLogged(true);
       navigate("/student-dashboard");
-    } else if (response.data != null && data.role === "codereviewer") {
+    } else if (user && data.role === "codereviewer") {
+
+      sessionStorage.setItem("id", user.id);
+      sessionStorage.setItem("firstName", user.firstName,);
+      sessionStorage.setItem("lastName", user.lastName,);
+      sessionStorage.setItem("email", user.email);
+      sessionStorage.setItem("role", "codereviewer");
+
+      toast.success("Login Succesfull");
+      setisLogged(true);
       navigate("/codereviewer-dashboard");
-    } else if (response.data != null && data.role === "admin") {
+    } else if (user && data.role === "admin") {
+
+      sessionStorage.setItem("id", user.id);
+      sessionStorage.setItem("firstName", user.firstName,);
+      sessionStorage.setItem("lastName", user.lastName,);
+      sessionStorage.setItem("email", user.email);
+      sessionStorage.setItem("role", "admin");
+
+      toast.success("Login Succesfull");
+      setisLogged(true);
       navigate("/admin-dashboard");
+    } else {
+
+      toast.error("Invalid User");
+      setData({
+        email: "",
+        password: "",
+        role: ""
+      });
+      navigate("/login");
     }
-
-
-    // if (response.data != "") {
-    //     var user = response.data;
-
-    //     sessionStorage.setItem("id", user.id);
-    //     sessionStorage.setItem("firstName", user.firstName,);
-    //     sessionStorage.setItem("lastName", user.lastName,);
-    //     sessionStorage.setItem("email", user.email);
-    //     sessionStorage.setItem("password", user.password,);
-    //     sessionStorage.setItem("role", user.role);
-
-    //     toast.success("Login Succesfull");
-    //     navigate("/order_online");
-    // } else {
-    //     toast.error("Invalid User");
-    //     setData({
-    //         email: "",
-    //         password: "",
-    //     });
-    //     navigate("/login_form");
-    // }
   };
-
-  useEffect(() => {
-
-    console.log(errors);
-    if(Object.keys(errors).length === 0 && isSubmit)
-    {
-      console.log(data);
-     
-    }
-
-  },[errors]);
-
-  const validate = (data) => {
-    const errors = {};
-    const regax = /^[^0-9]{2,}[a-zA-Z0-9._%+-]+@gmail\.com$/i;
-
-    const validpass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g;
-  
-    if (!data.email) {
-      errors.email = "Email is required!";
-    }else if(!regax.test(data.email)){
-      errors.email = "this is not a valid email format!";
-    }
-    if (!data.password) {
-      errors.password = "Password is required!";
-    } else if (!validpass.test(data.password)){
-      errors.password = "Required 4-8 charactors!";
-    }
-    if (!data.role) {
-      errors.role = "Role is required!";
-    }
-  
-    return errors;
-  };
-  
 
   return (
     <>
@@ -114,12 +89,10 @@ function Login() {
                   value={data.email}
                   placeholder="Email Address"
                   onChange={handleChange}
-                  
+
                 />
                 <br></br>
                 <i className="icon fas fa-envelope" />
-                <i className="error error-icon fas fa-exclamation-circle" />
-                <p className="text-danger">{errors.email}</p>
               </div>
               <br></br>
               
@@ -134,14 +107,10 @@ function Login() {
                   value={data.password}
                   placeholder="Password"
                   onChange={handleChange}
-                  
+
                 />
                 <i className="icon fas fa-lock" />
-                <i className="error error-icon fas fa-exclamation-circle" />
-                <p className="text-danger">{errors.password}</p>
               </div>
-              <br></br>
-              <div className="error error-txt">Password can't be blank</div>
             </div>
             <div className="selectRoleLogin">
               {/* <label for="role">Role</label> */}
@@ -170,13 +139,11 @@ function Login() {
                 onClick={handleChange}
               ></input>
               <label for="rolestudentadmin">Admin</label>
-              
+
             </div>
             <div className="pass-txt">
               {/* <Link to="#">Forgot password?</Link> */}
             </div>
-            <br></br>
-            <p className="text-danger">{errors.role}</p>
             <input
               type="submit"
               name="submit"

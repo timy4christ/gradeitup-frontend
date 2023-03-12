@@ -4,7 +4,7 @@ import "./profile.css"
 import { getCodeReviewerDetailFromServer } from '../../service/CodeReviewerServiceApi';
 import { useNavigate } from 'react-router-dom';
 
-function CodeReviewerDashboard() {
+function CodeReviewerDashboard({ setisLogged }) {
 
     const navigate = useNavigate();
     const [crDetails, setcrDetails] = useState({});
@@ -20,7 +20,17 @@ function CodeReviewerDashboard() {
     }
 
     useEffect(() => {
-        getCodeReviewerDetail();
+
+        var urole = sessionStorage.getItem("role");
+        console.log(urole);
+
+        if (urole != "codereviewer") {
+            sessionStorage.clear();
+            setisLogged(false);
+            navigate("/");
+        } else {
+            getCodeReviewerDetail();
+        }
     }, [])
 
 
