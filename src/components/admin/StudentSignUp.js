@@ -58,7 +58,7 @@ function StudentSignUp() {
     var urole = sessionStorage.getItem("role");
     console.log(urole);
 
-    if (!urole && urole != "admin") {
+    if (urole != "admin") {
       sessionStorage.clear();
       navigate("/");
     }

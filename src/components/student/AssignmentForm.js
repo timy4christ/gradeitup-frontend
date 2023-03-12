@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "../../cssfiles/SignUp.css"
 import { addAssignment, getCodeReviewerListFromServer } from '../../service/StudentServiceApi';
 import { SideNav } from './SideNav';
@@ -16,7 +17,7 @@ function AssignmentForm() {
         branch: "",
         status: "false",
         codeReviewVideoUrl: "",
-        studentId: "1",
+        studentId: sessionStorage.getItem("id"),
         codeReviewerId: ""
     })
 
@@ -30,21 +31,29 @@ function AssignmentForm() {
         console.log(data);
         const response = await addAssignment(data);
         console.log(response.data);
-        // if (response.status == 200) {
-        //   //toast.success("Registered Successfully");
-        //   navigate("/login_form");
-        // } else {
-        //   //toast.error("Something went wrong!");
-        //   setData({
-        //     firstName: "",
-        //     lastName: "",
-        //     email: "",
-        //     mobileNo: "",
-        //     password: "",
-        //     role:""
-        //   });
-        //   navigate("/signup_form")
-        // }
+        if (response.status == 200) {
+            toast.success("Assignment Submited Successfully");
+            setData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                mobileNo: "",
+                password: "",
+                role: ""
+            });
+            navigate("/student-dashboard");
+        } else {
+            toast.error("Something went wrong!");
+            setData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                mobileNo: "",
+                password: "",
+                role: ""
+            });
+            navigate("/signup_form")
+        }
     }
 
     const getCodeReviewerList = async () => {
@@ -58,7 +67,7 @@ function AssignmentForm() {
         var urole = sessionStorage.getItem("role");
         console.log(urole);
 
-        if (!urole && urole != "student") {
+        if (urole != "student") {
             sessionStorage.clear();
             navigate("/");
         } else {

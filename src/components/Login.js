@@ -5,7 +5,7 @@ import "../cssfiles/Login.css";
 import { login } from "../service/AdminServiceApi";
 
 
-function Login({ setLogged }) {
+function Login({ setisLogged }) {
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -37,7 +37,7 @@ function Login({ setLogged }) {
       sessionStorage.setItem("role", "student");
 
       toast.success("Login Succesfull");
-      setLogged(true);
+      setisLogged(true);
       navigate("/student-dashboard");
     } else if (user && data.role === "codereviewer") {
 
@@ -48,7 +48,7 @@ function Login({ setLogged }) {
       sessionStorage.setItem("role", "codereviewer");
 
       toast.success("Login Succesfull");
-      setLogged(true);
+      setisLogged(true);
       navigate("/codereviewer-dashboard");
     } else if (user && data.role === "admin") {
 
@@ -59,7 +59,7 @@ function Login({ setLogged }) {
       sessionStorage.setItem("role", "admin");
 
       toast.success("Login Succesfull");
-      setLogged(true);
+      setisLogged(true);
       navigate("/admin-dashboard");
     } else {
 
@@ -71,29 +71,6 @@ function Login({ setLogged }) {
       });
       navigate("/login");
     }
-
-
-
-    // if (response.data != "") {
-    //     var user = response.data;
-
-    //     sessionStorage.setItem("id", user.id);
-    //     sessionStorage.setItem("firstName", user.firstName,);
-    //     sessionStorage.setItem("lastName", user.lastName,);
-    //     sessionStorage.setItem("email", user.email);
-    //     sessionStorage.setItem("password", user.password,);
-    //     sessionStorage.setItem("role", user.role);
-
-    //     toast.success("Login Succesfull");
-    //     navigate("/order_online");
-    // } else {
-    //     toast.error("Invalid User");
-    //     setData({
-    //         email: "",
-    //         password: "",
-    //     });
-    //     navigate("/login_form");
-    // }
   };
 
   return (

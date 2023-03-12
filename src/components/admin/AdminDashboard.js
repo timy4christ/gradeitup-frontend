@@ -17,7 +17,8 @@ function AdminDashboard() {
     const [admin, setAdmin] = useState({})
 
     const getAdminDetails = async () => {
-        const response = await getAdminDetailFromServer(1);
+        var id = sessionStorage.getItem("id");
+        const response = await getAdminDetailFromServer(id);
         console.log(response.data);
         setAdmin(response.data);
     }
@@ -27,7 +28,7 @@ function AdminDashboard() {
         var urole = sessionStorage.getItem("role");
         console.log(urole);
 
-        if (!urole && urole != "admin") {
+        if (urole != "admin") {
             sessionStorage.clear();
             navigate("/");
         } else {

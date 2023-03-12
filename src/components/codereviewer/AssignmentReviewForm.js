@@ -54,7 +54,7 @@ function AssignmentReviewForm() {
         var urole = sessionStorage.getItem("role");
         console.log(urole);
 
-        if (!urole && urole != "codereviewer") {
+        if (urole != "codereviewer") {
             sessionStorage.clear();
             navigate("/");
         } else {

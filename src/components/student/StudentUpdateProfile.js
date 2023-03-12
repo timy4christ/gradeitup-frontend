@@ -17,7 +17,8 @@ function StudentUpdateProfile() {
 
 
     const getStudentDetail = async () => {
-        const response = await getStudentDetailFromServer(1); //need to add session id
+        var id = sessionStorage.getItem("id");
+        const response = await getStudentDetailFromServer(id); //need to add session id
         console.log(response.data);
         setStudent(response.data);
     }
@@ -38,7 +39,7 @@ function StudentUpdateProfile() {
         var urole = sessionStorage.getItem("role");
         console.log(urole);
 
-        if (!urole && urole != "student") {
+        if (urole != "student") {
             sessionStorage.clear();
             navigate("/");
         } else {

@@ -21,16 +21,24 @@ import AdminUpdateProfile from "./components/admin/AdminUpdateProfile";
 import StudentUpdateProfile from "./components/student/StudentUpdateProfile";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 
-  const [isLogged, setLogged] = useState(false);
+  const [isLogged, setisLogged] = useState(false);
 
+  // useEffect(() => {
+  //   //console.log("inside app.js");
+  //   if (!sessionStorage) {
+  //     setisLogged(true);
+  //   } else {
+  //     setisLogged(false)
+  //   }
+  // }, [])
 
   return (
     <BrowserRouter>
-      <Header isLogged={isLogged} setLogged={setLogged}></Header>
+      <Header isLogged={isLogged} setisLogged={setisLogged}></Header>
       <ToastContainer autoClose={900} />
       <Routes>
 
@@ -41,7 +49,7 @@ function App() {
 
 
         {/* admin */}
-        <Route path="/admin-dashboard" element={<AdminDashboard></AdminDashboard>}></Route>
+        <Route path="/admin-dashboard" element={<AdminDashboard setisLogged={setisLogged} ></AdminDashboard>}></Route>
         <Route
           path="/admin/update-profile"
           element={<AdminUpdateProfile></AdminUpdateProfile>}
@@ -53,10 +61,10 @@ function App() {
         ></Route>
         {/* <Route path="/admin/categories" element={<CategoriesPage></CategoriesPage>}></Route> */}
         {/* <Route path="/admin/add-category" element={<AddCategoryPage></AddCategoryPage>}></Route> */}
-        
-        
+
+
         {/* student */}
-        <Route path="/student-dashboard" element={<StudentDashboard></StudentDashboard>}></Route>
+        <Route path="/student-dashboard" element={<StudentDashboard setisLogged={setisLogged}></StudentDashboard>}></Route>
         <Route
           path="/student/update-profile"
           element={<StudentUpdateProfile />}
@@ -67,9 +75,8 @@ function App() {
         ></Route>
 
 
-
         {/* codereviewer */}
-        <Route path="/codereviewer-dashboard" element={<CodeReviewerDashboard></CodeReviewerDashboard>}></Route>
+        <Route path="/codereviewer-dashboard" element={<CodeReviewerDashboard setisLogged={setisLogged}></CodeReviewerDashboard>}></Route>
         <Route
           path="/codereviewer/get-assignments"
           element={<AssignmentReviewView></AssignmentReviewView>}
@@ -85,9 +92,8 @@ function App() {
 
 
 
-
         {/* login */}
-        <Route path="/login" element={<Login setLogged={setLogged}></Login>}></Route>
+        <Route path="/login" element={<Login setisLogged={setisLogged}></Login>}></Route>
 
       </Routes>
       {/* <Footer></Footer> */}

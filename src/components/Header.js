@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../cssfiles/Header.css'
 
-function Header({ isLogged, setLogged }) {
+function Header({ isLogged, setisLogged }) {
 
     const navigate = useNavigate();
 
     const handleLogout = () => {
         sessionStorage.clear();
-        setLogged(false);
+        setisLogged(false);
         navigate("/login");
     }
+
+    useEffect(() => {
+        if (sessionStorage) {
+            setisLogged(true);
+        }
+    }, [])
 
     return (
         <div>
