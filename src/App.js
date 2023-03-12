@@ -28,14 +28,14 @@ function App() {
 
   const [isLogged, setisLogged] = useState(false);
 
-  // useEffect(() => {
-  //   //console.log("inside app.js");
-  //   if (!sessionStorage) {
-  //     setisLogged(true);
-  //   } else {
-  //     setisLogged(false)
-  //   }
-  // }, [])
+  useEffect(() => {
+    console.log("inside app.js");
+    if (sessionStorage.getItem("id")) {
+      setisLogged(true);
+    } else {
+      setisLogged(false)
+    }
+  }, [])
 
   return (
     <BrowserRouter>

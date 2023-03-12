@@ -12,14 +12,18 @@ function Header({ isLogged, setisLogged }) {
         navigate("/login");
     }
 
-    useEffect(() => {
-        if (sessionStorage) {
-            setisLogged(true);
-        }
-    }, [])
+    // useEffect(() => {
+    //     console.log("header useEffect");
+    //     if (sessionStorage) {
+    //         console.log("inside header useEffect condition")
+    //         setisLogged(true);
+    //     }
+    // }, [])
 
     return (
-        <div>
+        <div>{
+            console.log("header body")
+        }
             <div className="header">
                 <div className="logo">GradeItUp</div>
                 <div className="nav-items">
