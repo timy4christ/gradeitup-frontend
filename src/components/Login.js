@@ -91,8 +91,11 @@ function Login({ setisLogged }) {
                   onChange={handleChange}
 
                 />
+                <br></br>
                 <i className="icon fas fa-envelope" />
               </div>
+              <br></br>
+              
               <div className="error error-txt">Email can't be blank</div>
             </div>
             <div className="field password">

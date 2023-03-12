@@ -22,6 +22,7 @@ import StudentUpdateProfile from "./components/student/StudentUpdateProfile";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
+import ViewAssignments from "./components/student/ViewAssignments";
 
 function App() {
 
@@ -72,6 +73,10 @@ function App() {
         <Route
           path="/student/add-assignment"
           element={<AssignmentForm></AssignmentForm>}
+        ></Route>
+        <Route
+          path="/student/view-assignments"
+          element={<ViewAssignments></ViewAssignments>}
         ></Route>
 
 
