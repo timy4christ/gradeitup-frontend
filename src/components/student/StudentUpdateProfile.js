@@ -41,7 +41,7 @@ function StudentUpdateProfile() {
 
         if (urole != "student") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getStudentDetail();
         }

@@ -35,29 +35,14 @@ function AssignmentForm() {
         console.log(data);
         const response = await addAssignment(data);
         console.log(response.data);
-        // if (response.status == 200) {
-        //     toast.success("Assignment Submited Successfully");
-        //     setData({
-        //         firstName: "",
-        //         lastName: "",
-        //         email: "",
-        //         mobileNo: "",
-        //         password: "",
-        //         role: ""
-        //     });
-        //     navigate("/student-dashboard");
-        // } else {
-        //     toast.error("Something went wrong!");
-        //     setData({
-        //         firstName: "",
-        //         lastName: "",
-        //         email: "",
-        //         mobileNo: "",
-        //         password: "",
-        //         role: ""
-        //     });
-        //     navigate("/signup_form")
-        // }
+        if (response.status == 200) {
+            toast.success("Assignment Submited Successfully");
+            navigate("/student-dashboard");
+        } else {
+            toast.error("Something went wrong!");
+
+            navigate("/signup_form")
+        }
     }
 
     const getCodeReviewerList = async () => {
@@ -73,7 +58,7 @@ function AssignmentForm() {
 
         if (urole != "student") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getCodeReviewerList();
         }

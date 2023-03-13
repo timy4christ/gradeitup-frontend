@@ -30,7 +30,7 @@ function AdminDashboard() {
 
         if (urole != "admin") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getAdminDetails();
         }

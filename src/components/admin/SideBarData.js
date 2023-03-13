@@ -21,8 +21,13 @@ export const SideBarData = [
     link: "/admin/add-codereviewer",
   },
   {
-    title: "Categories",
+    title: "Student Details",
     // icon: <AddBoxIcon />,
-    link: "/admin/categories",
+    link: "/admin/student-details",
+  },
+  {
+    title: "CodeReviewer Details",
+    // icon: <AddBoxIcon />,
+    link: "/admin/codereviewer-details",
   },
 ];

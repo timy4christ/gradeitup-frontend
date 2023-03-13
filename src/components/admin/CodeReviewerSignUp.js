@@ -104,7 +104,7 @@ function CodeReviewerSignUp() {
 
     if (urole != "admin") {
       sessionStorage.clear();
-      navigate("/");
+      navigate("/login");
     }
   }, [])
 

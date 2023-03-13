@@ -32,7 +32,7 @@ function StudentDashboard({ setisLogged }) {
         if (urole != "student") {
             sessionStorage.clear();
             setisLogged(false);
-            navigate("/");
+            navigate("/login");
         } else {
             getStudentDetails();
         }

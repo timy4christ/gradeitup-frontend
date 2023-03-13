@@ -1,3 +1,6 @@
-.register{
-    
+.row{
+    border:2px solid cyan;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }

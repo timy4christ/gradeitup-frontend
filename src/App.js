@@ -4,7 +4,6 @@ import AssignmentForm from "./components/student/AssignmentForm";
 import StudentSignUp from "./components/admin/StudentSignUp";
 import "./App.css";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Home from "./components/Home";
 import About from "./components/About";
 import AdminDashboard from "./components/admin/AdminDashboard";
@@ -24,6 +23,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import ViewAssignments from "./components/student/ViewAssignments";
 import StudentAssignmentView from "./components/student/StudentAssignmentView";
+import StudentDetailsTable from "./components/admin/StudentDetailsTable";
+import CodeReviewerDetailsTable from "./components/admin/CodeReviewerDetailsTable";
 
 function App() {
 
@@ -61,6 +62,14 @@ function App() {
           path="/admin/add-codereviewer"
           element={<CodeReviewerSignUp></CodeReviewerSignUp>}
         ></Route>
+        <Route
+          path="/admin/student-details"
+          element={<StudentDetailsTable></StudentDetailsTable>}
+        ></Route>
+        <Route
+          path="/admin/codereviewer-details"
+          element={<CodeReviewerDetailsTable></CodeReviewerDetailsTable>}
+        ></Route>
         {/* <Route path="/admin/categories" element={<CategoriesPage></CategoriesPage>}></Route> */}
         {/* <Route path="/admin/add-category" element={<AddCategoryPage></AddCategoryPage>}></Route> */}
 
@@ -80,7 +89,7 @@ function App() {
           element={<ViewAssignments></ViewAssignments>}
         ></Route>
         <Route
-          path="/student/view-assignments"
+          path="/student/assignmentview"
           element={<StudentAssignmentView></StudentAssignmentView>}
         ></Route>
 

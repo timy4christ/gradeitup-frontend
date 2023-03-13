@@ -40,7 +40,7 @@ function CodeReviewerUpdateProfile() {
 
         if (urole != "codereviewer") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getCodeReviewerDetail();
         }

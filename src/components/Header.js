@@ -38,7 +38,9 @@ function Header({ isLogged, setisLogged }) {
                                     <div>
                                         <Link className="anchor" to={"/contactus"}>Contact Us</Link>
                                     </div>
-                                </>) : <></>
+                                </>) : <><div>
+                                    <div className="anchor" to={"/contactus"}>WELCOME {sessionStorage.getItem("firstName")} {sessionStorage.getItem("lastName")}</div>
+                                </div></>
                         }
                     </div>
                     <div className="right">
