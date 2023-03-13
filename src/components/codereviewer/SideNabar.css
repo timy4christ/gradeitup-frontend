@@ -1,7 +1,7 @@
 .Sidebar
 {
     height:90vh;
-    background-color: grey;
+    background-color: rgb(80, 41, 41);
     width: 100% !important;
     padding: 0% !important;
     
@@ -30,7 +30,7 @@
 .SidebarList .row:hover
 {
     cursor: pointer;
-    background-color: black;
+    background-color: rgb(226, 171, 67);
 }
 .SidebarList #active
 {

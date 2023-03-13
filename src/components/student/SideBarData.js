@@ -20,4 +20,9 @@ export const SideBarData = [
     // icon: <AddBoxIcon />,
     link: "/student/view-assignments",
   },
+  {
+    title: "Assignment Report",
+    // icon: <AddBoxIcon />,
+    link: "/student/assignment-report",
+  },
 ];

@@ -69,7 +69,7 @@ function AssignmentReviewForm() {
                 <div className="col-lg-10">
                     <div className="register">
                         <div className="">
-                            <div className="card mt-2 mb-2 m-auto p-4 col-lg-4 d-block">
+                            <div className="card mt-2 mb-2 m-1 p-4 col-lg-4 d-block">
                                 {/* <div style={{ textAlign: "center" }} className="p-3">
               <img style={{ width: "100px" }} src="images/flavicons/add-friend.png" alt="" />
             </div> */}
@@ -164,27 +164,79 @@ function AssignmentReviewForm() {
                                                 value={assignment.codeReviewVideoUrl}
                                                 onChange={handleChange}
                                             />
+
                                             <span
                                                 id="codeReviewVideoUrl"
                                                 className="text-danger font-weight-regular"
                                             ></span>
                                         </div>
 
+                                        <div className="form-group" style={{ display: "inline-block" }}>
+                                            <label htmlFor="marks" className="font-weight-regular">
+                                                Marks
+                                            </label>
+                                            <input
+                                                type="number"
+                                                name="marks"
+                                                style={{ width: "150px" }}
+                                                className="form-control m-1"
+                                                id="marks"
+                                                value={assignment.marks}
+                                                onChange={handleChange}
+                                            />
+                                            <span
+                                                id="codeReviewVideoUrl"
+                                                className="text-danger font-weight-regular"
+                                            ></span>
+                                        </div>
+
+                                        <div className="form-group" style={{ display: "inline-block" }}>
+                                            <label htmlFor="totalmarks" className="font-weight-regular">
+                                                Total Marks
+                                            </label>
+                                            <input
+                                                type="number"
+                                                name="totalmarks"
+                                                style={{ width: "150px" }}
+                                                className="form-control m-1"
+                                                id="totalmarks"
+                                                value={assignment.totalmarks}
+                                                onChange={handleChange}
+                                            />
+                                            <span
+                                                id="codeReviewVideoUrl"
+                                                className="text-danger font-weight-regular"
+                                            ></span>
+                                        </div>
+
+                                        <span class="badge rounded-pill text-bg-primary">Primary</span>
 
 
-                                        <input
-                                            type="submit"
-                                            name="submit"
-                                            //value="Submit"
-                                            className="btn btn-primary"
-                                            autoComplete="off"
-                                        />&emsp;
+                                        <button className='btn btn-success mr-2'>Accept</button>
+                                        <button className='btn btn-danger m-2'>Reject</button>
+
+
+
 
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
+
+                {/* comments */}
+                <input
+                    type="text"
+                    name="comment"
+                    //value="Submit"
+                    className=""
+                // onChange={}
+                />&emsp;
+
+                <button className='btn btn-primary'
+                >Add Comment</button>
+
             </div>
         </>
 

@@ -16,7 +16,8 @@ function CodeReviewerUpdateProfile() {
     });
 
     const getCodeReviewerDetail = async () => {
-        const response = await getCodeReviewerDetailFromServer(1); //need to add session id
+        var id = sessionStorage.getItem("id");
+        const response = await getCodeReviewerDetailFromServer(id); //need to add session id
         console.log(response.data);
         setcrDetails(response.data);
     }

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAssignmentByCodeReviewerIdFromServer } from '../../service/CodeReviewerServiceApi';
+import { getAssignmentsByStudentIdFromServer } from '../../service/StudentServiceApi';
 import { SideNav } from './SideNav';
-import "./AssignmentReviewView.css"
 
-function AssignmentReviewView() {
+function StudentAssignmentView() {
 
     const navigate = useNavigate();
 
@@ -13,21 +12,21 @@ function AssignmentReviewView() {
 
     const getAllAssignments = async () => {
         var id = sessionStorage.getItem("id");
-        const response = await getAssignmentByCodeReviewerIdFromServer(id);
+        const response = await getAssignmentsByStudentIdFromServer(id);
         console.log(response.data);
         setAssignments(response.data);
     }
 
     const handleClick = (id) => {
         console.log(id);
-        navigate(`/codereviewer/assignmentreview`, { state: { id: id } })
+        // navigate(`/student/assignmentreview`, { state: { id: id } })
     }
 
     useEffect(() => {
         var urole = sessionStorage.getItem("role");
         console.log(urole);
 
-        if (urole != "codereviewer") {
+        if (urole != "student") {
             sessionStorage.clear();
             navigate("/");
         } else {
@@ -75,4 +74,4 @@ function AssignmentReviewView() {
     )
 }
 
-export default AssignmentReviewView
+export default StudentAssignmentView

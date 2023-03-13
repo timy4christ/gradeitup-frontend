@@ -17,3 +17,13 @@ export function getStudentDetailFromServer(id) {
 export function updateStudentDetails(data) {
     return axios.post(`${BASE_URL}/update-codereviewer`, data)
 }
+
+//getAssignmentByStudentIdFromServer
+export function getAssignmentsByStudentIdFromServer(sid) {
+    return axios.get(`${BASE_URL}/get-assignmentbysid/${sid}`);
+}
+
+
+
+
+

@@ -17,8 +17,12 @@ function AssignmentForm() {
         branch: "",
         status: "false",
         codeReviewVideoUrl: "",
+        marks: "",
+        totalMarks: "",
+        studentComments: "",
+        codeReviewerComments: "",
         studentId: sessionStorage.getItem("id"),
-        codeReviewerId: ""
+        codeReviewerId: "",
     })
 
     const handleChange = (e) => {
@@ -31,29 +35,29 @@ function AssignmentForm() {
         console.log(data);
         const response = await addAssignment(data);
         console.log(response.data);
-        if (response.status == 200) {
-            toast.success("Assignment Submited Successfully");
-            setData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                mobileNo: "",
-                password: "",
-                role: ""
-            });
-            navigate("/student-dashboard");
-        } else {
-            toast.error("Something went wrong!");
-            setData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                mobileNo: "",
-                password: "",
-                role: ""
-            });
-            navigate("/signup_form")
-        }
+        // if (response.status == 200) {
+        //     toast.success("Assignment Submited Successfully");
+        //     setData({
+        //         firstName: "",
+        //         lastName: "",
+        //         email: "",
+        //         mobileNo: "",
+        //         password: "",
+        //         role: ""
+        //     });
+        //     navigate("/student-dashboard");
+        // } else {
+        //     toast.error("Something went wrong!");
+        //     setData({
+        //         firstName: "",
+        //         lastName: "",
+        //         email: "",
+        //         mobileNo: "",
+        //         password: "",
+        //         role: ""
+        //     });
+        //     navigate("/signup_form")
+        // }
     }
 
     const getCodeReviewerList = async () => {

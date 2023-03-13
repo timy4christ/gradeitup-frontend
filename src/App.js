@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import ViewAssignments from "./components/student/ViewAssignments";
+import StudentAssignmentView from "./components/student/StudentAssignmentView";
 
 function App() {
 
@@ -75,8 +76,12 @@ function App() {
           element={<AssignmentForm></AssignmentForm>}
         ></Route>
         <Route
-          path="/student/view-assignments"
+          path="/student/assignment-report"
           element={<ViewAssignments></ViewAssignments>}
+        ></Route>
+        <Route
+          path="/student/view-assignments"
+          element={<StudentAssignmentView></StudentAssignmentView>}
         ></Route>
 
 

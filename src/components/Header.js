@@ -13,7 +13,7 @@ function Header({ isLogged, setisLogged }) {
     }
 
     useEffect(() => {
-        if (sessionStorage) {
+        if (sessionStorage.getItem("id")) {
             setisLogged(true);
         }
     }, [])
