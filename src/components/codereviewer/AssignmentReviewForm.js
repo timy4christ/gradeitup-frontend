@@ -8,7 +8,15 @@ function AssignmentReviewForm() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [assignment, setAssignment] = useState({});
+    const [assignment, setAssignment] = useState({
+        id:"",
+        name:"",
+        branch:"",
+        status:"",
+        codeReviewVideoUrl:"",
+        
+
+    });
 
     let id = location.state.id;
 

@@ -19,7 +19,9 @@ function Header({ isLogged, setisLogged }) {
     }, [])
 
     return (
-        <div>
+        <div>{
+            console.log("header body")
+        }
             <div className="header">
                 <div className="logo">GradeItUp</div>
                 <div className="nav-items">

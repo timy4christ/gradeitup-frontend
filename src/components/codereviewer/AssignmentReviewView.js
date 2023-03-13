@@ -3,7 +3,6 @@ import { Button, Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAssignmentByCodeReviewerIdFromServer } from '../../service/CodeReviewerServiceApi';
 import { SideNav } from './SideNav';
-import "./AssignmentReviewView.css"
 
 function AssignmentReviewView() {
 
