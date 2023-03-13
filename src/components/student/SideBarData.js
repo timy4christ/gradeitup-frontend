@@ -16,13 +16,13 @@ export const SideBarData = [
     link: "/student/add-assignment",
   },
   {
-    title: "View Assignments",
-    // icon: <AddBoxIcon />,
-    link: "/student/view-assignments",
-  },
-  {
     title: "Assignment Report",
     // icon: <AddBoxIcon />,
     link: "/student/assignment-report",
   },
+  // {
+  //   title: "View Assignment",
+  //   // icon: <AddBoxIcon />,
+  //   link: "/student/view-assignments",
+  // },
 ];

@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { getAssignmentsByStudentIdFromServer } from '../../service/StudentServiceApi';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getAssignmentById } from '../../service/StudentServiceApi';
 import { SideNav } from './SideNav';
 
 function StudentAssignmentView() {
 
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [assignments, setAssignments] = useState([]);
+    const [assignment, setAssignment] = useState({});
 
-    const getAllAssignments = async () => {
-        var id = sessionStorage.getItem("id");
-        const response = await getAssignmentsByStudentIdFromServer(id);
+    let id = location.state.id;
+
+    const getAssignment = async () => {
+        const response = await getAssignmentById(id);
         console.log(response.data);
-        setAssignments(response.data);
-    }
-
-    const handleClick = (id) => {
-        console.log(id);
-        // navigate(`/student/assignmentreview`, { state: { id: id } })
+        setAssignment(response.data);
     }
 
     useEffect(() => {
@@ -28,9 +25,9 @@ function StudentAssignmentView() {
 
         if (urole != "student") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
-            getAllAssignments();
+            getAssignment();
         }
     }, [])
 
@@ -40,34 +37,31 @@ function StudentAssignmentView() {
             <div className="row ">
                 <div className="col-lg-2 sidebar"><SideNav></SideNav></div>
                 <div className="col-lg-10 viewBody">
-                    {
-                        assignments.map((item) => {
 
-                            return (
-                                <>
+                    <div style={{ marginLeft: "10%", width: "100%", marginRight: "10%", paddingTop: "50px", marginBottom: "-15px" }}>
 
-                                    <div style={{ marginLeft: "10%", width: "100%", marginRight: "10%", paddingTop: "50px", marginBottom: "-15px" }}>
+                        <Card className="text-center box" style={{ width: "25%" }}>
+                            <Card.Header className='text-start'>
+                                <strong>Assignment Name: </strong>{assignment.name}<br />
+                                <strong>GitHubUrl: </strong>{assignment.githubUrl}<br />
+                                <strong>ReviewVideoUrl: </strong>{assignment.codeReviewVideoUrl}<br />
+                            </Card.Header>
+                            <Card.Body>
+                                <Card.Title>Post Comments</Card.Title>
+                                <Card.Text>
+                                    <input className='text m-2'></input>
+                                    <button className='btn btn-sm btn-success'>Post</button>
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Footer className="text-muted">Comments</Card.Footer>
+                        </Card>
+                    </div>
 
-                                        <Card className="text-center box" style={{ width: "25%" }}>
-                                            <Card.Header>{item.name}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Title>{item.name}</Card.Title>
-                                                <Card.Text className='text-start'>
-                                                    <strong>GitHubUrl: </strong>{item.githubUrl}<br />
-                                                    <strong>Branch: </strong>{item.branch}
-                                                </Card.Text>
-                                                <Button variant="primary" onClick={() => { handleClick(item.id) }}>Review</Button>
-                                            </Card.Body>
-                                            <Card.Footer className="text-muted">2 days ago</Card.Footer>
-                                        </Card>
-                                    </div>
-                                </>
-                            )
 
-                        })
-
-                    }
                 </div>
+
+
+
             </div>
 
         </>

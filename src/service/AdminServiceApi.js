@@ -8,11 +8,26 @@ export function addStudent(student) {
 
 export function addCodeReviewer(codeReviewer) {
     return axios.post(`${BASE_URL}/add-codereviewer`, codeReviewer);
-} 
+}
 
 export function getAdminDetailsFromServer() {
     return axios.get(`${BASE_URL}/admin-details`);
 }
+
+export function getStudentDetails() {
+    return axios.get(`${BASE_URL}/get-studentDetails`)
+}
+
+export function getCodeReviewerDetails() {
+    return axios.get(`${BASE_URL}/get-codeReviewerDetails`)
+}
+
+//FOR UPDATING
+export function updateAdminDetails(data) {
+    return axios.post(`${BASE_URL}/update-admin`, data)
+}
+
+
 
 //login service
 const LOGIN_BASE_URL = "http://localhost:8080/login"
@@ -22,11 +37,7 @@ export function login(data) {
 }
 
 
-export function getAdminDetailFromServer(id){
+export function getAdminDetailFromServer(id) {
     return axios.get(`${BASE_URL}/get-admin/${id}`);
 }
 
-//FOR UPDATING
-export function updateAdminDetails(data){
-    return axios.post(`${BASE_URL}/update-admin`, data)
-}

@@ -60,7 +60,7 @@ function StudentSignUp() {
 
     if (urole != "admin") {
       sessionStorage.clear();
-      navigate("/");
+      navigate("/login");
     }
   }, [])
 

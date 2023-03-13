@@ -28,7 +28,7 @@ function CodeReviewerDashboard({ setisLogged }) {
         if (urole != "codereviewer") {
             sessionStorage.clear();
             setisLogged(false);
-            navigate("/");
+            navigate("/login");
         } else {
             getCodeReviewerDetail();
         }

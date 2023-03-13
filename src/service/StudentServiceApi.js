@@ -23,6 +23,9 @@ export function getAssignmentsByStudentIdFromServer(sid) {
     return axios.get(`${BASE_URL}/get-assignmentbysid/${sid}`);
 }
 
+export function getAssignmentById(id) {
+    return axios.get(`${BASE_URL}/get-assignmentbyid/${id}`);
+}
 
 
 

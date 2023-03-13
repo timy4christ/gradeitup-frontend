@@ -17,7 +17,8 @@ function AdminUpdateProfile() {
 
 
     const getAdminDetail = async () => {
-        const response = await getAdminDetailFromServer(1); //need to add session id
+        var id = sessionStorage.getItem("id");
+        const response = await getAdminDetailFromServer(id); //need to add session id
         console.log(response.data);
         setAdmin(response.data);
     }
@@ -40,7 +41,7 @@ function AdminUpdateProfile() {
 
         if (urole != "admin") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getAdminDetail();
         }

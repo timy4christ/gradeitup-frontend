@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getAssignmentByIdFromServer, reviewAssignment } from '../../service/CodeReviewerServiceApi';
 import { SideNav } from './SideNav';
 
@@ -8,15 +9,7 @@ function AssignmentReviewForm() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [assignment, setAssignment] = useState({
-        id:"",
-        name:"",
-        branch:"",
-        status:"",
-        codeReviewVideoUrl:"",
-        
-
-    });
+    const [assignment, setAssignment] = useState({});
 
     let id = location.state.id;
 
@@ -36,21 +29,13 @@ function AssignmentReviewForm() {
         console.log(assignment);
         const response = await reviewAssignment(assignment);
         console.log(response.data);
-        // if (response.status == 200) {
-        //   //toast.success("Registered Successfully");
-        //   navigate("/login_form");
-        // } else {
-        //   //toast.error("Something went wrong!");
-        //   setData({
-        //     firstName: "",
-        //     lastName: "",
-        //     email: "",
-        //     mobileNo: "",
-        //     password: "",
-        //     role:""
-        //   });
-        //   navigate("/signup_form")
-        // }
+        if (response.status == 200) {
+            toast.success("Reviewed Successfully");
+            navigate("/codereviewer/get-assignments");
+        } else {
+            toast.error("Something went wrong!");
+            navigate("/codereviewer/assignmentreview")
+        }
     }
 
     // useEffect(()=>{
@@ -64,7 +49,7 @@ function AssignmentReviewForm() {
 
         if (urole != "codereviewer") {
             sessionStorage.clear();
-            navigate("/");
+            navigate("/login");
         } else {
             getAssignmentById();
         }
@@ -204,11 +189,11 @@ function AssignmentReviewForm() {
                                             </label>
                                             <input
                                                 type="number"
-                                                name="totalmarks"
+                                                name="totalMarks"
                                                 style={{ width: "150px" }}
                                                 className="form-control m-1"
-                                                id="totalmarks"
-                                                value={assignment.totalmarks}
+                                                id="totalMarks"
+                                                value={assignment.totalMarks}
                                                 onChange={handleChange}
                                             />
                                             <span
@@ -217,12 +202,19 @@ function AssignmentReviewForm() {
                                             ></span>
                                         </div>
 
-                                        <span class="badge rounded-pill text-bg-primary">Primary</span>
+                                        {/* <span class="badge rounded-pill text-bg-primary">Primary</span> */}
 
 
-                                        <button className='btn btn-success mr-2'>Accept</button>
-                                        <button className='btn btn-danger m-2'>Reject</button>
+                                        {/* <button className='btn btn-success mr-2'>Accept</button>
+                                        <button className='btn btn-danger m-2'>Reject</button> */}
 
+                                        <input
+                                            type="submit"
+                                            name="submit"
+                                            //value="Submit"
+                                            className="btn btn-success"
+                                            autoComplete="off"
+                                        />&emsp;
 
 
 
